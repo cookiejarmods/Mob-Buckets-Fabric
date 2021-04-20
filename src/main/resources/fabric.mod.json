@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "mobbuckets",
+  "version": "${version}",
+  "name": "Mob Buckets",
+  "description": "Simply Makes Mobs Go In A Bucket!",
+  "authors": [
+    "CodersLabs"
+  ],
+  "contributors": [],
+  "contact": {},
+  "license": "GPL-3.0",
+  "icon": "assets/mobbuckets/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.github.coderslabs.mobbuckets.MobBuckets"
+    ],
+    "client": [],
+    "server": []
+  },
+  "mixins": [
+    "mobbuckets.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*"
+  }
+}
