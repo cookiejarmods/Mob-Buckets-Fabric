@@ -67,7 +67,7 @@ public class MobBuckets implements ModInitializer {
     public static VillagerBucketItem VIlLAGER_BUCKET_ITEM;
     public static WanderingTraderBucketItem WANDERING_TRADER_BUCKET_ITEM;
     public static WolfBucketItem WOLF_BUCKET_BUCKET_ITEM;
-    public static WolfBucketItem BLAZE_BUCKET_BUCKET_ITEM;
+    public static BlazeBucketItem BLAZE_BUCKET_BUCKET_ITEM;
     public static ZombieBucketItem ZOMBIE_BUCKET_ITEM;
     public static ZombifiedPiglinBucketItem ZOMBIFIED_PIGLIN_BUCKET_ITEM;
 
