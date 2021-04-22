@@ -24,11 +24,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
-import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.addOrDropStack;
-import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.setCompound;
+import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.*;
 
 public class MobBuckets implements ModInitializer {
-
     public static Logger LOGGER = LogManager.getLogger();
 
     public static String MOD_ID = "mobbuckets";
@@ -71,45 +69,44 @@ public class MobBuckets implements ModInitializer {
     public static ZombieBucketItem ZOMBIE_BUCKET_ITEM;
     public static ZombifiedPiglinBucketItem ZOMBIFIED_PIGLIN_BUCKET_ITEM;
 
-    public static ItemGroup MOREBUCKETSTAB = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "morebucketstab"), () -> new ItemStack(BEE_BUCKET_ITEM));
+    public static ItemGroup MOB_BUCKETS_TAB = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "mob_buckets_tab"), () -> new ItemStack(CREEPER_BUCKET_ITEM));
 
     @Override
     public void onInitialize() {
-
-        BEE_BUCKET_ITEM = generator.item.registerBlandItem(new BeeBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "bee_bucket");
-        CAT_BUCKET_ITEM = generator.item.registerBlandItem(new CatBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "cat_bucket");
-        CAVE_SPIDER_BUCKET_ITEM = generator.item.registerBlandItem(new CaveSpiderBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "cave_spider_bucket");
-        CHICKEN_BUCKET_ITEM = generator.item.registerBlandItem(new ChickenBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "chicken_bucket");
-        COW_BUCKET_ITEM = generator.item.registerBlandItem(new CowBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "cow_bucket");
-        CREEPER_BUCKET_ITEM = generator.item.registerBlandItem(new CreeperBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "creeper_bucket");
-        DOLPHIN_BUCKET_ITEM = generator.item.registerBlandItem(new DolphinBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "dolphin_bucket");
-        DONKEY_BUCKET_ITEM = generator.item.registerBlandItem(new DonkeyBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "donkey_bucket");
-        ENDERMAN_BUCKET_ITEM = generator.item.registerBlandItem(new EndermanBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "enderman_bucket");
-        FOX_BUCKET_ITEM = generator.item.registerBlandItem(new FoxBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "fox_bucket");
-        HORSE_BUCKET_ITEM = generator.item.registerBlandItem(new HorseBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "horse_bucket");
-        IRON_GOLEM_BUCKET_ITEM = generator.item.registerBlandItem(new IronGolemBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "iron_golem_bucket");
-        LLAMA_BUCKET_ITEM = generator.item.registerBlandItem(new LlamaBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "llama_bucket");
-        MOOSHROOM_BUCKET_ITEM = generator.item.registerBlandItem(new MooshroomBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "mooshroom_bucket");
-        MULE_BUCKET_ITEM = generator.item.registerBlandItem(new MuleBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "mule_bucket");
-        OCELOT_BUCKET_ITEM = generator.item.registerBlandItem(new OcelotBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "ocelot_bucket");
-        PANDA_BUCKET_ITEM = generator.item.registerBlandItem(new PandaBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "panda_bucket");
-        PARROT_BUCKET_ITEM = generator.item.registerBlandItem(new ParrotBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "parrot_bucket");
-        PIG_BUCKET_ITEM = generator.item.registerBlandItem(new PigBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "pig_bucket");
-        PIGLIN_BUCKET_ITEM = generator.item.registerBlandItem(new PiglinBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "piglin_bucket");
-        POLAR_BEAR_BUCKET_ITEM = generator.item.registerBlandItem(new PolarBearBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "polar_bear_bucket");
-        RABBIT_BUCKET_ITEM = generator.item.registerBlandItem(new RabbitBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "rabbit_bucket");
-        SHEEP_BUCKET_ITEM = generator.item.registerBlandItem(new SheepBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "sheep_bucket");
-        SKELETON_HORSE_BUCKET_ITEM = generator.item.registerBlandItem(new SkeletonHorseBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "skeleton_horse_bucket");
-        SNOW_GOLEM_BUCKET_ITEM = generator.item.registerBlandItem(new SnowGolemBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "snow_golem_bucket");
-        SQUID_BUCKET_ITEM = generator.item.registerBlandItem(new SquidBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "squid_bucket");
-        STRIDER_BUCKET_ITEM = generator.item.registerBlandItem(new StriderBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "strider_bucket");
-        TURTLE_BUCKET_ITEM = generator.item.registerBlandItem(new TurtleBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "turtle_bucket");
-        VIlLAGER_BUCKET_ITEM = generator.item.registerBlandItem(new VillagerBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "villager_bucket");
-        WANDERING_TRADER_BUCKET_ITEM = generator.item.registerBlandItem(new WanderingTraderBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "wandering_trader_bucket");
-        WOLF_BUCKET_BUCKET_ITEM = generator.item.registerBlandItem(new WolfBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "wolf_bucket");
-        BLAZE_BUCKET_BUCKET_ITEM = generator.item.registerBlandItem(new BlazeBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "blaze_bucket");
-        ZOMBIE_BUCKET_ITEM = generator.item.registerBlandItem(new ZombieBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "zombie_bucket");
-        ZOMBIFIED_PIGLIN_BUCKET_ITEM = generator.item.registerBlandItem(new ZombifiedPiglinBucketItem(new Item.Settings().group(MOREBUCKETSTAB)), "zombified_piglin_bucket");
+        BEE_BUCKET_ITEM = generator.item.registerBlandItem(new BeeBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "bee_bucket");
+        CAT_BUCKET_ITEM = generator.item.registerBlandItem(new CatBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "cat_bucket");
+        CAVE_SPIDER_BUCKET_ITEM = generator.item.registerBlandItem(new CaveSpiderBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "cave_spider_bucket");
+        CHICKEN_BUCKET_ITEM = generator.item.registerBlandItem(new ChickenBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "chicken_bucket");
+        COW_BUCKET_ITEM = generator.item.registerBlandItem(new CowBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "cow_bucket");
+        CREEPER_BUCKET_ITEM = generator.item.registerBlandItem(new CreeperBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "creeper_bucket");
+        DOLPHIN_BUCKET_ITEM = generator.item.registerBlandItem(new DolphinBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "dolphin_bucket");
+        DONKEY_BUCKET_ITEM = generator.item.registerBlandItem(new DonkeyBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "donkey_bucket");
+        ENDERMAN_BUCKET_ITEM = generator.item.registerBlandItem(new EndermanBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "enderman_bucket");
+        FOX_BUCKET_ITEM = generator.item.registerBlandItem(new FoxBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "fox_bucket");
+        HORSE_BUCKET_ITEM = generator.item.registerBlandItem(new HorseBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "horse_bucket");
+        IRON_GOLEM_BUCKET_ITEM = generator.item.registerBlandItem(new IronGolemBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "iron_golem_bucket");
+        LLAMA_BUCKET_ITEM = generator.item.registerBlandItem(new LlamaBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "llama_bucket");
+        MOOSHROOM_BUCKET_ITEM = generator.item.registerBlandItem(new MooshroomBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "mooshroom_bucket");
+        MULE_BUCKET_ITEM = generator.item.registerBlandItem(new MuleBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "mule_bucket");
+        OCELOT_BUCKET_ITEM = generator.item.registerBlandItem(new OcelotBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "ocelot_bucket");
+        PANDA_BUCKET_ITEM = generator.item.registerBlandItem(new PandaBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "panda_bucket");
+        PARROT_BUCKET_ITEM = generator.item.registerBlandItem(new ParrotBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "parrot_bucket");
+        PIG_BUCKET_ITEM = generator.item.registerBlandItem(new PigBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "pig_bucket");
+        PIGLIN_BUCKET_ITEM = generator.item.registerBlandItem(new PiglinBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "piglin_bucket");
+        POLAR_BEAR_BUCKET_ITEM = generator.item.registerBlandItem(new PolarBearBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "polar_bear_bucket");
+        RABBIT_BUCKET_ITEM = generator.item.registerBlandItem(new RabbitBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "rabbit_bucket");
+        SHEEP_BUCKET_ITEM = generator.item.registerBlandItem(new SheepBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "sheep_bucket");
+        SKELETON_HORSE_BUCKET_ITEM = generator.item.registerBlandItem(new SkeletonHorseBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "skeleton_horse_bucket");
+        SNOW_GOLEM_BUCKET_ITEM = generator.item.registerBlandItem(new SnowGolemBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "snow_golem_bucket");
+        SQUID_BUCKET_ITEM = generator.item.registerBlandItem(new SquidBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "squid_bucket");
+        STRIDER_BUCKET_ITEM = generator.item.registerBlandItem(new StriderBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "strider_bucket");
+        TURTLE_BUCKET_ITEM = generator.item.registerBlandItem(new TurtleBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "turtle_bucket");
+        VIlLAGER_BUCKET_ITEM = generator.item.registerBlandItem(new VillagerBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "villager_bucket");
+        WANDERING_TRADER_BUCKET_ITEM = generator.item.registerBlandItem(new WanderingTraderBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "wandering_trader_bucket");
+        WOLF_BUCKET_BUCKET_ITEM = generator.item.registerBlandItem(new WolfBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "wolf_bucket");
+        BLAZE_BUCKET_BUCKET_ITEM = generator.item.registerBlandItem(new BlazeBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "blaze_bucket");
+        ZOMBIE_BUCKET_ITEM = generator.item.registerBlandItem(new ZombieBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "zombie_bucket");
+        ZOMBIFIED_PIGLIN_BUCKET_ITEM = generator.item.registerBlandItem(new ZombifiedPiglinBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "zombified_piglin_bucket");
 
         UseEntityCallback.EVENT.register(this::tryCaptureBee);
         UseEntityCallback.EVENT.register(this::tryCaptureCat);
@@ -147,7 +144,6 @@ public class MobBuckets implements ModInitializer {
         UseEntityCallback.EVENT.register(this::tryCaptureZombifiedPiglin);
 
         log(Level.INFO, "Mobbing the Buckets");
-
     }
 
     private ActionResult tryCaptureBee(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
@@ -1173,5 +1169,4 @@ public class MobBuckets implements ModInitializer {
     public static void log(Level level, String message){
         LOGGER.log(level, "["+MOD_NAME+"] " + message);
     }
-
 }

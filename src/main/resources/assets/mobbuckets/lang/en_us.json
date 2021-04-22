@@ -1,4 +1,8 @@
 {
+  "_comment": "Mob Bucket Tab",
+  "itemGroup.mobbuckets.mob_buckets_tab": "Mob Buckets",
+
+  "_comment2": "All the Mob Buckets!",
   "item.mobbuckets.slime_bucket": "Slime Bucket",
   "item.mobbuckets.chicken_bucket": "Chicken Bucket"
 }
