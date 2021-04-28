@@ -2,6 +2,7 @@ package com.github.coderslabs.mobbuckets.init;
 
 import com.github.coderslabs.mobbuckets.item.*;
 import com.github.evoslab.cookiecore.datagen.MainGenerator;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -58,7 +59,7 @@ public class MobBucketItems {
     public static SquidBucketItem SQUID_BUCKET_ITEM;
     public static StrayBucketItem STRAY_BUCKET_ITEM;
     public static StriderBucketItem COLD_STRIDER_BUCKET_ITEM;
-    public static StriderBucketItem WARM_STRIDER_BUCKET_ITEM;
+    public static WarmStriderBucketItem WARM_STRIDER_BUCKET_ITEM;
     public static TurtleBucketItem TURTLE_BUCKET_ITEM;
     public static VexBucketItem VEX_BUCKET_ITEM;
     public static VillagerBucketItem VIlLAGER_BUCKET_ITEM;
@@ -121,7 +122,7 @@ public class MobBucketItems {
         SQUID_BUCKET_ITEM  = generator.item.registerBlandItem(new SquidBucketItem(Properties.MOB_BUCKET), "squid_bucket");
         STRAY_BUCKET_ITEM  = generator.item.registerBlandItem(new StrayBucketItem(Properties.MOB_BUCKET), "stray_bucket");
         COLD_STRIDER_BUCKET_ITEM  = generator.item.registerBlandItem(new StriderBucketItem(Properties.MOB_BUCKET), "cold_strider_bucket");
-        WARM_STRIDER_BUCKET_ITEM  = generator.item.registerBlandItem(new StriderBucketItem(Properties.MOB_BUCKET), "warm_strider_bucket");
+        WARM_STRIDER_BUCKET_ITEM  = generator.item.registerBlandItem(new WarmStriderBucketItem(Fluids.LAVA, Properties.MOB_BUCKET), "warm_strider_bucket");
         TURTLE_BUCKET_ITEM  = generator.item.registerBlandItem(new TurtleBucketItem(Properties.MOB_BUCKET), "turtle_bucket");
         VEX_BUCKET_ITEM  = generator.item.registerBlandItem(new VexBucketItem(Properties.MOB_BUCKET), "vex_bucket");
         VIlLAGER_BUCKET_ITEM  = generator.item.registerBlandItem(new VillagerBucketItem(Properties.MOB_BUCKET), "villager_bucket");
