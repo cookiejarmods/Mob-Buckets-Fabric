@@ -65,7 +65,6 @@ public class MobBuckets implements ModInitializer {
         UseEntityCallback.EVENT.register(this::tryCaptureGuardian);
         UseEntityCallback.EVENT.register(this::tryCaptureHoglin);
         UseEntityCallback.EVENT.register(this::tryCaptureHorse);
-        UseEntityCallback.EVENT.register(this::tryCaptureHusk);
         UseEntityCallback.EVENT.register(this::tryCaptureIronGolem);
         UseEntityCallback.EVENT.register(this::tryCaptureLlama);
         UseEntityCallback.EVENT.register(this::tryCaptureMagmaCube);
@@ -101,19 +100,36 @@ public class MobBuckets implements ModInitializer {
         UseEntityCallback.EVENT.register(this::tryCaptureWitherSkeleton);
         UseEntityCallback.EVENT.register(this::tryCaptureWolf);
         UseEntityCallback.EVENT.register(this::tryCaptureZoglin);
-        UseEntityCallback.EVENT.register(this::tryCaptureZombie);
-        UseEntityCallback.EVENT.register(this::tryCaptureZombieVillager);
-        UseEntityCallback.EVENT.register(this::tryCaptureZombifiedPiglin);
+        UseEntityCallback.EVENT.register(this::tryCaptureZombieRelatedMobs);
 
         log(Level.INFO, "Mobing the Buckets");
     }
 
-    private ActionResult tryCaptureZombieVillager(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
-        if (!entity.world.isClient
-                && entity instanceof ZombieVillagerEntity
-                && ((ZombieVillagerEntity)entity).getHealth() > 0
-        ) {
-            ZombieVillagerEntity mob = (ZombieVillagerEntity)entity;
+    private ActionResult tryCaptureZombieRelatedMobs(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        /* Capture Zombie */
+        if (!entity.world.isClient && entity instanceof ZombieEntity && ((ZombieEntity)entity).getHealth() > 0) {
+            ZombieEntity mob = (ZombieEntity) entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(ZOMBIE_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, ZombieBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        } /* Capture Zombie Villager */ else if (!entity.world.isClient && entity instanceof ZombieVillagerEntity && ((ZombieVillagerEntity)entity).getHealth() > 0) {
+            ZombieVillagerEntity mob = (ZombieVillagerEntity) entity;
             ItemStack held = player.getStackInHand(hand);
 
             if (held.isEmpty() || held.getItem() != Items.BUCKET)
@@ -122,6 +138,69 @@ public class MobBuckets implements ModInitializer {
             ItemStack mobBucket = new ItemStack(ZOMBIE_VILLAGER_BUCKET_ITEM);
             CompoundTag tag = new CompoundTag();
             setCompound(mobBucket, ZombieVillagerBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        } /* Capture Husk */ else if (!entity.world.isClient && entity instanceof HuskEntity && ((HuskEntity)entity).getHealth() > 0) {
+            HuskEntity mob = (HuskEntity) entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(HUSK_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, HuskBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        } /* Capture Drowned */ else if (!entity.world.isClient && entity instanceof DrownedEntity && ((DrownedEntity)entity).getHealth() > 0) {
+            DrownedEntity mob = (DrownedEntity) entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(DROWNED_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, DrownedBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        } /* Capture Zombified Piglin */ else if (!entity.world.isClient && entity instanceof ZombifiedPiglinEntity && ((ZombifiedPiglinEntity)entity).getHealth() > 0) {
+            ZombifiedPiglinEntity mob = (ZombifiedPiglinEntity) entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(ZOMBIFIED_PIGLIN_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, ZombifiedPiglinBucketItem.STORED_MOB, mob.toTag(tag));
 
             if (held.getCount() == 1) {
                 player.setStackInHand(hand, mobBucket);
@@ -512,36 +591,6 @@ public class MobBuckets implements ModInitializer {
             ItemStack mobBucket = new ItemStack(MAGMA_CUBE_BUCKET_ITEM);
             CompoundTag tag = new CompoundTag();
             setCompound(mobBucket, MagmaCubeBucketItem.STORED_MOB, mob.toTag(tag));
-
-            if (held.getCount() == 1) {
-                player.setStackInHand(hand, mobBucket);
-            } else {
-                held.decrement(1);
-                addOrDropStack(player, mobBucket);
-            }
-
-            player.swingHand(hand);
-            entity.remove();
-            return ActionResult.SUCCESS;
-        }
-
-        return ActionResult.PASS;
-    }
-
-    private ActionResult tryCaptureHusk(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
-        if (!entity.world.isClient
-                && entity instanceof HuskEntity
-                && ((HuskEntity)entity).getHealth() > 0
-        ) {
-            HuskEntity mob = (HuskEntity)entity;
-            ItemStack held = player.getStackInHand(hand);
-
-            if (held.isEmpty() || held.getItem() != Items.BUCKET)
-                return ActionResult.PASS;
-
-            ItemStack mobBucket = new ItemStack(HUSK_BUCKET_ITEM);
-            CompoundTag tag = new CompoundTag();
-            setCompound(mobBucket, HuskBucketItem.STORED_MOB, mob.toTag(tag));
 
             if (held.getCount() == 1) {
                 player.setStackInHand(hand, mobBucket);
@@ -1838,66 +1887,6 @@ public class MobBuckets implements ModInitializer {
             ItemStack mobBucket = new ItemStack(BLAZE_BUCKET_BUCKET_ITEM);
             CompoundTag tag = new CompoundTag();
             setCompound(mobBucket, BlazeBucketItem.STORED_MOB, mob.toTag(tag));
-
-            if (held.getCount() == 1) {
-                player.setStackInHand(hand, mobBucket);
-            } else {
-                held.decrement(1);
-                addOrDropStack(player, mobBucket);
-            }
-
-            player.swingHand(hand);
-            entity.remove();
-            return ActionResult.SUCCESS;
-        }
-
-        return ActionResult.PASS;
-    }
-
-    private ActionResult tryCaptureZombie(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
-        if (!entity.world.isClient
-                && entity instanceof ZombieEntity
-                && ((ZombieEntity)entity).getHealth() > 0
-        ) {
-            ZombieEntity mob = (ZombieEntity)entity;
-            ItemStack held = player.getStackInHand(hand);
-
-            if (held.isEmpty() || held.getItem() != Items.BUCKET)
-                return ActionResult.PASS;
-
-            ItemStack mobBucket = new ItemStack(ZOMBIE_BUCKET_ITEM);
-            CompoundTag tag = new CompoundTag();
-            setCompound(mobBucket, ZombieBucketItem.STORED_MOB, mob.toTag(tag));
-
-            if (held.getCount() == 1) {
-                player.setStackInHand(hand, mobBucket);
-            } else {
-                held.decrement(1);
-                addOrDropStack(player, mobBucket);
-            }
-
-            player.swingHand(hand);
-            entity.remove();
-            return ActionResult.SUCCESS;
-        }
-
-        return ActionResult.PASS;
-    }
-
-    private ActionResult tryCaptureZombifiedPiglin(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
-        if (!entity.world.isClient
-                && entity instanceof ZombifiedPiglinEntity
-                && ((ZombifiedPiglinEntity)entity).getHealth() > 0
-        ) {
-            ZombifiedPiglinEntity mob = (ZombifiedPiglinEntity)entity;
-            ItemStack held = player.getStackInHand(hand);
-
-            if (held.isEmpty() || held.getItem() != Items.BUCKET)
-                return ActionResult.PASS;
-
-            ItemStack mobBucket = new ItemStack(ZOMBIFIED_PIGLIN_BUCKET_ITEM);
-            CompoundTag tag = new CompoundTag();
-            setCompound(mobBucket, ZombifiedPiglinBucketItem.STORED_MOB, mob.toTag(tag));
 
             if (held.getCount() == 1) {
                 player.setStackInHand(hand, mobBucket);
