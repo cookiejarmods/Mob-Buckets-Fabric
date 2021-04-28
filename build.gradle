@@ -26,6 +26,12 @@ dependencies {
 
 	//Cookie Core
 	modImplementation group: 'com.github.evoslab', name: 'cookiecore', version: '0.0.5'
+
+	dependencies {
+		modApi("me.shedaniel.cloth:cloth-config-fabric:4.11.19") {
+			exclude(group: "net.fabricmc.fabric-api")
+		}
+	}
 }
 
 repositories {
@@ -37,8 +43,16 @@ repositories {
 	//Cookie Core Maven
 	maven {
 		url = 'https://raw.githubusercontent.com/Evoslab/Evoslab-Maven-Repo/master/'
+
+		maven { url "https://maven.shedaniel.me/" }
+
 	}
 }
+
+
+
+
+
 
 processResources {
 	inputs.property "version", project.version
