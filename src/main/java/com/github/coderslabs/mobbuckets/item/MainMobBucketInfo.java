@@ -11,7 +11,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 
 public class MainMobBucketInfo extends Item {
-
     public MainMobBucketInfo(Settings settings) {
         super(settings);
     }
@@ -43,12 +42,9 @@ public class MainMobBucketInfo extends Item {
         getNBT(stack).put(tag, cmp);
     }
 
-    public static boolean addOrDropStack(PlayerEntity player, ItemStack stack) {
+    public static void addOrDropStack(PlayerEntity player, ItemStack stack) {
         if (!player.inventory.insertStack(stack)) {
             player.dropItem(stack, true);
-            return false;
         }
-        return true;
     }
-
 }

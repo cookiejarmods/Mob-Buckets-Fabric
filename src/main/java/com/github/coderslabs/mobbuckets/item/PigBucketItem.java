@@ -18,14 +18,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.getCompound;
-import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.spawn;
+import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.*;
 
 public class PigBucketItem extends Item {
-
-    //Thanks to charm for the code help
-
-    public static final String STORED_MOB = "stored_pig";
+    public static final String STORED_MOB = "stored_mob";
+    public static final EntityType<PigEntity> MOB_ENTITY_TYPE = EntityType.PIG;
 
     public PigBucketItem(Settings settings) {
         super(settings);
@@ -46,22 +43,20 @@ public class PigBucketItem extends Item {
         world.playSound(null, player.getBlockPos(), SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 
         if (!world.isClient) {
-
             double x = pos.getX() + 0.5F + facing.getOffsetX();
             double y = pos.getY() + 0.25F + (world.random.nextFloat() / 2.0F) + facing.getOffsetY();
             double z = pos.getZ() + 0.5F + facing.getOffsetZ();
             BlockPos spawnPos = new BlockPos(x, y, z);
 
-            // spawn the pig
-            PigEntity pig = spawn(EntityType.PIG, (ServerWorld)world, spawnPos, SpawnReason.BUCKET);
-            if (pig != null) {
+            // spawn the mob
+            PigEntity mob = spawn(MOB_ENTITY_TYPE, (ServerWorld)world, spawnPos, SpawnReason.BUCKET);
+            if (mob != null) {
 
                 CompoundTag data = getCompound(held, STORED_MOB);
                 if (!data.isEmpty())
-                    pig.readCustomDataFromTag(data);
+                    mob.readCustomDataFromTag(data);
 
-                world.spawnEntity(pig);
-
+                world.spawnEntity(mob);
             }
         }
         player.swingHand(hand);
@@ -71,36 +66,4 @@ public class PigBucketItem extends Item {
 
         return ActionResult.SUCCESS;
     }
-
 }
-
-/*
-public class AnimalBucketItem extends BucketItem {
-    private final EntityType<?> animalType;
-
-    public AnimalBucketItem(EntityType<?> type, Fluid fluid, Settings settings) {
-        super(fluid, settings);
-        this.animalType = type;
-    }
-
-    public void onEmptied(World world, ItemStack stack, BlockPos pos) {
-        if (world instanceof ServerWorld) {
-            this.spawnAnimal((ServerWorld)world, stack, pos);
-        }
-
-    }
-
-    protected void playEmptyingSound(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos) {
-        world.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-    }
-
-    private void spawnAnimal(ServerWorld serverWorld, ItemStack stack, BlockPos pos) {
-        Entity entity = this.animalType.spawnFromItemStack(serverWorld, stack, (PlayerEntity)null, pos, SpawnReason.BUCKET, true, false);
-        if (entity != null) {
-            ((FishEntity)entity).setFromBucket(true);
-        }
-
-    }
-
-}
- */

@@ -18,14 +18,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.getCompound;
-import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.spawn;
+import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.*;
 
 public class ZombifiedPiglinBucketItem extends Item {
-
-    //Thanks to charm for the code help
-
-    public static final String STORED_MOB = "stored_zombified_piglin";
+    public static final String STORED_MOB = "stored_mob";
+    public static final EntityType<ZombifiedPiglinEntity> MOB_ENTITY_TYPE = EntityType.ZOMBIFIED_PIGLIN;
 
     public ZombifiedPiglinBucketItem(Settings settings) {
         super(settings);
@@ -46,22 +43,19 @@ public class ZombifiedPiglinBucketItem extends Item {
         world.playSound(null, player.getBlockPos(), SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 
         if (!world.isClient) {
-
             double x = pos.getX() + 0.5F + facing.getOffsetX();
             double y = pos.getY() + 0.25F + (world.random.nextFloat() / 2.0F) + facing.getOffsetY();
             double z = pos.getZ() + 0.5F + facing.getOffsetZ();
             BlockPos spawnPos = new BlockPos(x, y, z);
 
-            // spawn the zombifiedPiglin
-            ZombifiedPiglinEntity zombifiedPiglin = spawn(EntityType.ZOMBIFIED_PIGLIN, (ServerWorld)world, spawnPos, SpawnReason.BUCKET);
-            if (zombifiedPiglin != null) {
-
+            // spawn the mob
+            ZombifiedPiglinEntity mob = spawn(MOB_ENTITY_TYPE, (ServerWorld)world, spawnPos, SpawnReason.BUCKET);
+            if (mob != null) {
                 CompoundTag data = getCompound(held, STORED_MOB);
                 if (!data.isEmpty())
-                    zombifiedPiglin.readCustomDataFromTag(data);
+                    mob.readCustomDataFromTag(data);
 
-                world.spawnEntity(zombifiedPiglin);
-
+                world.spawnEntity(mob);
             }
         }
         player.swingHand(hand);
@@ -71,37 +65,4 @@ public class ZombifiedPiglinBucketItem extends Item {
 
         return ActionResult.SUCCESS;
     }
-
 }
-
-/*
-    private ActionResult tryCaptureEx(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
-        if (!entity.world.isClient
-                && entity instanceof ExEntity
-                && ((ExEntity)entity).getHealth() > 0
-        ) {
-            ExEntity mob = (ExEntity)entity;
-            ItemStack held = player.getStackInHand(hand);
-
-            if (held.isEmpty() || held.getItem() != Items.BUCKET)
-                return ActionResult.PASS;
-
-            ItemStack mobBucket = new ItemStack(Nx_BUCKET_ITEM);
-            CompoundTag tag = new CompoundTag();
-            setCompound(mobBucket, ExBucketItem.STORED_MOB, mob.toTag(tag));
-
-            if (held.getCount() == 1) {
-                player.setStackInHand(hand, mobBucket);
-            } else {
-                held.decrement(1);
-                addOrDropStack(player, mobBucket);
-            }
-
-            player.swingHand(hand);
-            entity.remove();
-            return ActionResult.SUCCESS;
-        }
-
-        return ActionResult.PASS;
-    }
- */

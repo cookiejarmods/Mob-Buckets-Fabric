@@ -2,7 +2,9 @@
   "required": true,
   "package": "com.github.coderslabs.mobbuckets.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [],
+  "mixins": [
+    "accessor.ItemAccessor"
+  ],
   "client": [],
   "server": [],
   "injectors": {

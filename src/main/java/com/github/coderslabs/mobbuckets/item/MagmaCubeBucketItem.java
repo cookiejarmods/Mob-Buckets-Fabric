@@ -1,11 +1,9 @@
 package com.github.coderslabs.mobbuckets.item;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.passive.BeeEntity;
+import net.minecraft.entity.mob.MagmaCubeEntity;
 import net.minecraft.entity.player.PlayerEntity;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -21,16 +19,12 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.*;
-/*
-public class MobBucketItem extends Item {
-    //Thanks to charm for the code help
 
-
+public class MagmaCubeBucketItem extends Item {
     public static final String STORED_MOB = "stored_mob";
-    public static EntityType type;
-    public static LivingEntity entity;
+    public static final EntityType<MagmaCubeEntity> MOB_ENTITY_TYPE = EntityType.MAGMA_CUBE;
 
-    public MobBucketItem(Settings settings) {
+    public MagmaCubeBucketItem(Settings settings) {
         super(settings);
     }
 
@@ -49,18 +43,22 @@ public class MobBucketItem extends Item {
         world.playSound(null, player.getBlockPos(), SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 
         if (!world.isClient) {
+
             double x = pos.getX() + 0.5F + facing.getOffsetX();
             double y = pos.getY() + 0.25F + (world.random.nextFloat() / 2.0F) + facing.getOffsetY();
             double z = pos.getZ() + 0.5F + facing.getOffsetZ();
             BlockPos spawnPos = new BlockPos(x, y, z);
 
-            entity mob = spawn(type, (ServerWorld)world, spawnPos, SpawnReason.BUCKET);
+            // spawn the mob
+            MagmaCubeEntity mob = spawn(MOB_ENTITY_TYPE, (ServerWorld)world, spawnPos, SpawnReason.BUCKET);
             if (mob != null) {
+
                 CompoundTag data = getCompound(held, STORED_MOB);
                 if (!data.isEmpty())
                     mob.readCustomDataFromTag(data);
 
                 world.spawnEntity(mob);
+
             }
         }
         player.swingHand(hand);
@@ -71,4 +69,3 @@ public class MobBucketItem extends Item {
         return ActionResult.SUCCESS;
     }
 }
- */

@@ -22,10 +22,8 @@ import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.getCompoun
 import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.spawn;
 
 public class VillagerBucketItem extends Item {
-
-    //Thanks to charm for the code help
-
-    public static final String STORED_MOB = "stored_villager";
+    public static final String STORED_MOB = "stored_mob";
+    public static final EntityType<VillagerEntity> MOB_ENTITY_TYPE = EntityType.VILLAGER;
 
     public VillagerBucketItem(Settings settings) {
         super(settings);
@@ -52,15 +50,15 @@ public class VillagerBucketItem extends Item {
             double z = pos.getZ() + 0.5F + facing.getOffsetZ();
             BlockPos spawnPos = new BlockPos(x, y, z);
 
-            // spawn the villager
-            VillagerEntity villager = spawn(EntityType.VILLAGER, (ServerWorld)world, spawnPos, SpawnReason.BUCKET);
-            if (villager != null) {
+            // spawn the mob
+            VillagerEntity mob = spawn(MOB_ENTITY_TYPE, (ServerWorld)world, spawnPos, SpawnReason.BUCKET);
+            if (mob != null) {
 
                 CompoundTag data = getCompound(held, STORED_MOB);
                 if (!data.isEmpty())
-                    villager.readCustomDataFromTag(data);
+                    mob.readCustomDataFromTag(data);
 
-                world.spawnEntity(villager);
+                world.spawnEntity(mob);
 
             }
         }
@@ -71,36 +69,4 @@ public class VillagerBucketItem extends Item {
 
         return ActionResult.SUCCESS;
     }
-
 }
-
-/*
-public class AnimalBucketItem extends BucketItem {
-    private final EntityType<?> animalType;
-
-    public AnimalBucketItem(EntityType<?> type, Fluid fluid, Settings settings) {
-        super(fluid, settings);
-        this.animalType = type;
-    }
-
-    public void onEmptied(World world, ItemStack stack, BlockPos pos) {
-        if (world instanceof ServerWorld) {
-            this.spawnAnimal((ServerWorld)world, stack, pos);
-        }
-
-    }
-
-    protected void playEmptyingSound(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos) {
-        world.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-    }
-
-    private void spawnAnimal(ServerWorld serverWorld, ItemStack stack, BlockPos pos) {
-        Entity entity = this.animalType.spawnFromItemStack(serverWorld, stack, (PlayerEntity)null, pos, SpawnReason.BUCKET, true, false);
-        if (entity != null) {
-            ((FishEntity)entity).setFromBucket(true);
-        }
-
-    }
-
-}
- */

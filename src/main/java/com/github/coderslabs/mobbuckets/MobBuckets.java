@@ -1,15 +1,16 @@
 package com.github.coderslabs.mobbuckets;
 
+import com.github.coderslabs.mobbuckets.init.MobBucketItems;
 import com.github.coderslabs.mobbuckets.item.*;
-import com.github.evoslab.cookiecore.datagen.MainGenerator;
+import com.github.coderslabs.mobbuckets.mixin.accessor.ItemAccessor;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -24,6 +25,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
+import static com.github.coderslabs.mobbuckets.init.MobBucketItems.*;
 import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.*;
 
 public class MobBuckets implements ModInitializer {
@@ -32,83 +34,19 @@ public class MobBuckets implements ModInitializer {
     public static String MOD_ID = "mobbuckets";
     public static String MOD_NAME = "Mob Buckets";
 
-    private static final MainGenerator generator = new MainGenerator(MOD_ID);
-
-    public static BeeBucketItem BEE_BUCKET_ITEM;
-    public static CatBucketItem CAT_BUCKET_ITEM;
-    public static CaveSpiderBucketItem CAVE_SPIDER_BUCKET_ITEM;
-    public static ChickenBucketItem CHICKEN_BUCKET_ITEM;
-    public static CowBucketItem COW_BUCKET_ITEM;
-    public static CreeperBucketItem CREEPER_BUCKET_ITEM;
-    public static DolphinBucketItem DOLPHIN_BUCKET_ITEM;
-    public static DonkeyBucketItem DONKEY_BUCKET_ITEM;
-    public static EndermanBucketItem ENDERMAN_BUCKET_ITEM;
-    public static FoxBucketItem FOX_BUCKET_ITEM;
-    public static HorseBucketItem HORSE_BUCKET_ITEM;
-    public static IronGolemBucketItem IRON_GOLEM_BUCKET_ITEM;
-    public static LlamaBucketItem LLAMA_BUCKET_ITEM;
-    public static MooshroomBucketItem MOOSHROOM_BUCKET_ITEM;
-    public static MuleBucketItem MULE_BUCKET_ITEM;
-    public static OcelotBucketItem OCELOT_BUCKET_ITEM;
-    public static PandaBucketItem PANDA_BUCKET_ITEM;
-    public static ParrotBucketItem PARROT_BUCKET_ITEM;
-    public static PigBucketItem PIG_BUCKET_ITEM;
-    public static PiglinBucketItem PIGLIN_BUCKET_ITEM;
-    public static PolarBearBucketItem POLAR_BEAR_BUCKET_ITEM;
-    public static RabbitBucketItem RABBIT_BUCKET_ITEM;
-    public static SheepBucketItem SHEEP_BUCKET_ITEM;
-    public static SkeletonHorseBucketItem SKELETON_HORSE_BUCKET_ITEM;
-    public static SnowGolemBucketItem SNOW_GOLEM_BUCKET_ITEM;
-    public static SquidBucketItem SQUID_BUCKET_ITEM;
-    public static StriderBucketItem STRIDER_BUCKET_ITEM;
-    public static TurtleBucketItem TURTLE_BUCKET_ITEM;
-    public static VillagerBucketItem VIlLAGER_BUCKET_ITEM;
-    public static WanderingTraderBucketItem WANDERING_TRADER_BUCKET_ITEM;
-    public static WolfBucketItem WOLF_BUCKET_BUCKET_ITEM;
-    public static BlazeBucketItem BLAZE_BUCKET_BUCKET_ITEM;
-    public static ZombieBucketItem ZOMBIE_BUCKET_ITEM;
-    public static ZombifiedPiglinBucketItem ZOMBIFIED_PIGLIN_BUCKET_ITEM;
-
     public static ItemGroup MOB_BUCKETS_TAB = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "mob_buckets_tab"), () -> new ItemStack(CREEPER_BUCKET_ITEM));
 
     @Override
     public void onInitialize() {
-        BEE_BUCKET_ITEM = generator.item.registerBlandItem(new BeeBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "bee_bucket");
-        CAT_BUCKET_ITEM = generator.item.registerBlandItem(new CatBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "cat_bucket");
-        CAVE_SPIDER_BUCKET_ITEM = generator.item.registerBlandItem(new CaveSpiderBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "cave_spider_bucket");
-        CHICKEN_BUCKET_ITEM = generator.item.registerBlandItem(new ChickenBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "chicken_bucket");
-        COW_BUCKET_ITEM = generator.item.registerBlandItem(new CowBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "cow_bucket");
-        CREEPER_BUCKET_ITEM = generator.item.registerBlandItem(new CreeperBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "creeper_bucket");
-        DOLPHIN_BUCKET_ITEM = generator.item.registerBlandItem(new DolphinBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "dolphin_bucket");
-        DONKEY_BUCKET_ITEM = generator.item.registerBlandItem(new DonkeyBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "donkey_bucket");
-        ENDERMAN_BUCKET_ITEM = generator.item.registerBlandItem(new EndermanBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "enderman_bucket");
-        FOX_BUCKET_ITEM = generator.item.registerBlandItem(new FoxBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "fox_bucket");
-        HORSE_BUCKET_ITEM = generator.item.registerBlandItem(new HorseBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "horse_bucket");
-        IRON_GOLEM_BUCKET_ITEM = generator.item.registerBlandItem(new IronGolemBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "iron_golem_bucket");
-        LLAMA_BUCKET_ITEM = generator.item.registerBlandItem(new LlamaBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "llama_bucket");
-        MOOSHROOM_BUCKET_ITEM = generator.item.registerBlandItem(new MooshroomBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "mooshroom_bucket");
-        MULE_BUCKET_ITEM = generator.item.registerBlandItem(new MuleBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "mule_bucket");
-        OCELOT_BUCKET_ITEM = generator.item.registerBlandItem(new OcelotBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "ocelot_bucket");
-        PANDA_BUCKET_ITEM = generator.item.registerBlandItem(new PandaBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "panda_bucket");
-        PARROT_BUCKET_ITEM = generator.item.registerBlandItem(new ParrotBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "parrot_bucket");
-        PIG_BUCKET_ITEM = generator.item.registerBlandItem(new PigBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "pig_bucket");
-        PIGLIN_BUCKET_ITEM = generator.item.registerBlandItem(new PiglinBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "piglin_bucket");
-        POLAR_BEAR_BUCKET_ITEM = generator.item.registerBlandItem(new PolarBearBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "polar_bear_bucket");
-        RABBIT_BUCKET_ITEM = generator.item.registerBlandItem(new RabbitBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "rabbit_bucket");
-        SHEEP_BUCKET_ITEM = generator.item.registerBlandItem(new SheepBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "sheep_bucket");
-        SKELETON_HORSE_BUCKET_ITEM = generator.item.registerBlandItem(new SkeletonHorseBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "skeleton_horse_bucket");
-        SNOW_GOLEM_BUCKET_ITEM = generator.item.registerBlandItem(new SnowGolemBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "snow_golem_bucket");
-        SQUID_BUCKET_ITEM = generator.item.registerBlandItem(new SquidBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "squid_bucket");
-        STRIDER_BUCKET_ITEM = generator.item.registerBlandItem(new StriderBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "strider_bucket");
-        TURTLE_BUCKET_ITEM = generator.item.registerBlandItem(new TurtleBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "turtle_bucket");
-        VIlLAGER_BUCKET_ITEM = generator.item.registerBlandItem(new VillagerBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "villager_bucket");
-        WANDERING_TRADER_BUCKET_ITEM = generator.item.registerBlandItem(new WanderingTraderBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "wandering_trader_bucket");
-        WOLF_BUCKET_BUCKET_ITEM = generator.item.registerBlandItem(new WolfBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "wolf_bucket");
-        BLAZE_BUCKET_BUCKET_ITEM = generator.item.registerBlandItem(new BlazeBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "blaze_bucket");
-        ZOMBIE_BUCKET_ITEM = generator.item.registerBlandItem(new ZombieBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "zombie_bucket");
-        ZOMBIFIED_PIGLIN_BUCKET_ITEM = generator.item.registerBlandItem(new ZombifiedPiglinBucketItem(new Item.Settings().group(MOB_BUCKETS_TAB)), "zombified_piglin_bucket");
+        MobBucketItems.init();
 
+        ((ItemAccessor)Items.WATER_BUCKET).setMaxCount(16);
+        ((ItemAccessor)Items.LAVA_BUCKET).setMaxCount(16);
+        ((ItemAccessor)Items.MILK_BUCKET).setMaxCount(16);
+
+        UseEntityCallback.EVENT.register(this::tryCaptureBat);
         UseEntityCallback.EVENT.register(this::tryCaptureBee);
+        UseEntityCallback.EVENT.register(this::tryCaptureBlaze);
         UseEntityCallback.EVENT.register(this::tryCaptureCat);
         UseEntityCallback.EVENT.register(this::tryCaptureCaveSpider);
         UseEntityCallback.EVENT.register(this::tryCaptureChicken);
@@ -116,34 +54,632 @@ public class MobBuckets implements ModInitializer {
         UseEntityCallback.EVENT.register(this::tryCaptureCreeper);
         UseEntityCallback.EVENT.register(this::tryCaptureDolphin);
         UseEntityCallback.EVENT.register(this::tryCaptureDonkey);
+        UseEntityCallback.EVENT.register(this::tryCaptureDrowned);
+        UseEntityCallback.EVENT.register(this::tryCaptureElderGuardian);
+        UseEntityCallback.EVENT.register(this::tryCaptureEnderDragon);
         UseEntityCallback.EVENT.register(this::tryCaptureEnderman);
+        UseEntityCallback.EVENT.register(this::tryCaptureEndermite);
+        UseEntityCallback.EVENT.register(this::tryCaptureEvoker);
         UseEntityCallback.EVENT.register(this::tryCaptureFox);
+        UseEntityCallback.EVENT.register(this::tryCaptureGhast);
+        UseEntityCallback.EVENT.register(this::tryCaptureGuardian);
+        UseEntityCallback.EVENT.register(this::tryCaptureHoglin);
         UseEntityCallback.EVENT.register(this::tryCaptureHorse);
+        UseEntityCallback.EVENT.register(this::tryCaptureHusk);
         UseEntityCallback.EVENT.register(this::tryCaptureIronGolem);
         UseEntityCallback.EVENT.register(this::tryCaptureLlama);
-        UseEntityCallback.EVENT.register(this::tryCaptureMooshroom);
+        UseEntityCallback.EVENT.register(this::tryCaptureMagmaCube);
+        UseEntityCallback.EVENT.register(this::tryCaptureRedMooshroom);
+        UseEntityCallback.EVENT.register(this::tryCaptureBrownMooshroom);
         UseEntityCallback.EVENT.register(this::tryCaptureMule);
         UseEntityCallback.EVENT.register(this::tryCaptureOcelot);
         UseEntityCallback.EVENT.register(this::tryCapturePanda);
         UseEntityCallback.EVENT.register(this::tryCaptureParrot);
+        UseEntityCallback.EVENT.register(this::tryCapturePhantom);
         UseEntityCallback.EVENT.register(this::tryCapturePig);
+        UseEntityCallback.EVENT.register(this::tryCapturePiglinBrute);
         UseEntityCallback.EVENT.register(this::tryCapturePiglin);
         UseEntityCallback.EVENT.register(this::tryCapturePolarBear);
         UseEntityCallback.EVENT.register(this::tryCaptureRabbit);
+        UseEntityCallback.EVENT.register(this::tryCaptureRavager);
         UseEntityCallback.EVENT.register(this::tryCaptureSheep);
+        UseEntityCallback.EVENT.register(this::tryCaptureShulker);
+        UseEntityCallback.EVENT.register(this::tryCaptureSkeleton);
         UseEntityCallback.EVENT.register(this::tryCaptureSkeletonHorse);
+        UseEntityCallback.EVENT.register(this::tryCaptureSlime);
         UseEntityCallback.EVENT.register(this::tryCaptureSnowGolem);
         UseEntityCallback.EVENT.register(this::tryCaptureSquid);
-        UseEntityCallback.EVENT.register(this::tryCaptureStrider);
+        UseEntityCallback.EVENT.register(this::tryCaptureStray);
+        UseEntityCallback.EVENT.register(this::tryCaptureColdStrider);
+        UseEntityCallback.EVENT.register(this::tryCaptureWarmStrider);
         UseEntityCallback.EVENT.register(this::tryCaptureTurtle);
+        UseEntityCallback.EVENT.register(this::tryCaptureVex);
         UseEntityCallback.EVENT.register(this::tryCaptureVillager);
+        UseEntityCallback.EVENT.register(this::tryCaptureVindicator);
         UseEntityCallback.EVENT.register(this::tryCaptureWanderingTrader);
+        UseEntityCallback.EVENT.register(this::tryCaptureWitch);
+        UseEntityCallback.EVENT.register(this::tryCaptureWitherSkeleton);
         UseEntityCallback.EVENT.register(this::tryCaptureWolf);
-        UseEntityCallback.EVENT.register(this::tryCaptureBlaze);
+        UseEntityCallback.EVENT.register(this::tryCaptureZoglin);
         UseEntityCallback.EVENT.register(this::tryCaptureZombie);
+        UseEntityCallback.EVENT.register(this::tryCaptureZombieVillager);
         UseEntityCallback.EVENT.register(this::tryCaptureZombifiedPiglin);
 
-        log(Level.INFO, "Mobbing the Buckets");
+        log(Level.INFO, "Mobing the Buckets");
+    }
+
+    private ActionResult tryCaptureZombieVillager(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof ZombieVillagerEntity
+                && ((ZombieVillagerEntity)entity).getHealth() > 0
+        ) {
+            ZombieVillagerEntity mob = (ZombieVillagerEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(ZOMBIE_VILLAGER_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, ZombieVillagerBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureZoglin(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof ZoglinEntity
+                && ((ZoglinEntity)entity).getHealth() > 0
+        ) {
+            ZoglinEntity mob = (ZoglinEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(ZOGLIN_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, ZoglinBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureWitherSkeleton(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof WitherSkeletonEntity
+                && ((WitherSkeletonEntity)entity).getHealth() > 0
+        ) {
+            WitherSkeletonEntity mob = (WitherSkeletonEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(WITHER_SKELETON_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, WitherSkeletonBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureWitch(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof WitchEntity
+                && ((WitchEntity)entity).getHealth() > 0
+        ) {
+            WitchEntity mob = (WitchEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(WITCH_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, WitchBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureVindicator(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof VindicatorEntity
+                && ((VindicatorEntity)entity).getHealth() > 0
+        ) {
+            VindicatorEntity mob = (VindicatorEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(VINDICATOR_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, VindicatorBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureVex(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof VexEntity
+                && ((VexEntity)entity).getHealth() > 0
+        ) {
+            VexEntity mob = (VexEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(VEX_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, VexBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureStray(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof StrayEntity
+                && ((StrayEntity)entity).getHealth() > 0
+        ) {
+            StrayEntity mob = (StrayEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(STRAY_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, StrayBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureSlime(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof SlimeEntity
+                && ((SlimeEntity)entity).getHealth() > 0
+        ) {
+            SlimeEntity mob = (SlimeEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(SLIME_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, SlimeBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureSkeleton(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof SkeletonEntity
+                && ((SkeletonEntity)entity).getHealth() > 0
+        ) {
+            SkeletonEntity mob = (SkeletonEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(SKELETON_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, SkeletonBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureShulker(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof ShulkerEntity
+                && ((ShulkerEntity)entity).getHealth() > 0
+        ) {
+            ShulkerEntity mob = (ShulkerEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(SHULKER_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, ShulkerBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureRavager(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof RavagerEntity
+                && ((RavagerEntity)entity).getHealth() > 0
+        ) {
+            RavagerEntity mob = (RavagerEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(RAVAGER_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, RavagerBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCapturePiglinBrute(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof PiglinBruteEntity
+                && ((PiglinBruteEntity)entity).getHealth() > 0
+        ) {
+            PiglinBruteEntity mob = (PiglinBruteEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(PIGLIN_BRUTE_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, PiglinBruteBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCapturePhantom(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof PhantomEntity
+                && ((PhantomEntity)entity).getHealth() > 0
+        ) {
+            PhantomEntity mob = (PhantomEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(PHANTOM_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, PhantomBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureMagmaCube(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof MagmaCubeEntity
+                && ((MagmaCubeEntity)entity).getHealth() > 0
+        ) {
+            MagmaCubeEntity mob = (MagmaCubeEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(MAGMA_CUBE_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, MagmaCubeBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureHusk(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof HuskEntity
+                && ((HuskEntity)entity).getHealth() > 0
+        ) {
+            HuskEntity mob = (HuskEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(HUSK_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, HuskBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureHoglin(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof HoglinEntity
+                && ((HoglinEntity)entity).getHealth() > 0
+        ) {
+            HoglinEntity mob = (HoglinEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(HOGLIN_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, HoglinBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureGuardian(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof GuardianEntity
+                && ((GuardianEntity)entity).getHealth() > 0
+        ) {
+            GuardianEntity mob = (GuardianEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(GUARDIAN_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, GuardianBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureGhast(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof GhastEntity
+                && ((GhastEntity)entity).getHealth() > 0
+        ) {
+            GhastEntity mob = (GhastEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(GHAST_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, GhastBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+
+
+
+
+    private ActionResult tryCaptureBat(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
+        if (!entity.world.isClient
+                && entity instanceof BatEntity
+                && ((BatEntity)entity).getHealth() > 0
+        ) {
+            BatEntity mob = (BatEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(BAT_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, BatBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
     }
 
     private ActionResult tryCaptureBee(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
@@ -386,6 +922,96 @@ public class MobBuckets implements ModInitializer {
         return ActionResult.PASS;
     }
 
+    private ActionResult tryCaptureDrowned(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
+        if (!entity.world.isClient
+                && entity instanceof DrownedEntity
+                && ((DrownedEntity)entity).getHealth() > 0
+        ) {
+            DrownedEntity mob = (DrownedEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(DROWNED_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, DrownedBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureElderGuardian(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
+        if (!entity.world.isClient
+                && entity instanceof ElderGuardianEntity
+                && ((ElderGuardianEntity)entity).getHealth() > 0
+        ) {
+            ElderGuardianEntity mob = (ElderGuardianEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(ELDER_GUARDIAN_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, ElderGuardianBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureEnderDragon(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
+        if (!entity.world.isClient
+                && entity instanceof EnderDragonEntity
+                && ((EnderDragonEntity)entity).getHealth() > 0
+        ) {
+            EnderDragonEntity mob = (EnderDragonEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(ENDER_DRAGON_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, EnderDragonBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
     private ActionResult tryCaptureEnderman(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
         if (!entity.world.isClient
                 && entity instanceof EndermanEntity
@@ -416,6 +1042,36 @@ public class MobBuckets implements ModInitializer {
         return ActionResult.PASS;
     }
 
+    private ActionResult tryCaptureEndermite(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
+        if (!entity.world.isClient
+                && entity instanceof EndermiteEntity
+                && ((EndermiteEntity)entity).getHealth() > 0
+        ) {
+            EndermiteEntity mob = (EndermiteEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(ENDERMITE_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, EndermiteBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
     private ActionResult tryCaptureFox(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
         if (!entity.world.isClient
                 && entity instanceof FoxEntity
@@ -430,6 +1086,36 @@ public class MobBuckets implements ModInitializer {
             ItemStack mobBucket = new ItemStack(FOX_BUCKET_ITEM);
             CompoundTag tag = new CompoundTag();
             setCompound(mobBucket, FoxBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureEvoker(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+        if (!entity.world.isClient
+                && entity instanceof EvokerEntity
+                && ((EvokerEntity)entity).getHealth() > 0
+        ) {
+            EvokerEntity mob = (EvokerEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(EVOKER_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, EvokerBucketItem.STORED_MOB, mob.toTag(tag));
 
             if (held.getCount() == 1) {
                 player.setStackInHand(hand, mobBucket);
@@ -536,10 +1222,11 @@ public class MobBuckets implements ModInitializer {
         return ActionResult.PASS;
     }
 
-    private ActionResult tryCaptureMooshroom(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
+    private ActionResult tryCaptureRedMooshroom(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
         if (!entity.world.isClient
                 && entity instanceof MooshroomEntity
                 && ((MooshroomEntity)entity).getHealth() > 0
+                && MooshroomEntity.Type.RED == MooshroomEntity.Type.valueOf("red")
         ) {
             MooshroomEntity mob = (MooshroomEntity)entity;
             ItemStack held = player.getStackInHand(hand);
@@ -547,7 +1234,38 @@ public class MobBuckets implements ModInitializer {
             if (held.isEmpty() || held.getItem() != Items.BUCKET)
                 return ActionResult.PASS;
 
-            ItemStack mobBucket = new ItemStack(MOOSHROOM_BUCKET_ITEM);
+            ItemStack mobBucket = new ItemStack(RED_MOOSHROOM_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, MooshroomBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureBrownMooshroom(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
+        if (!entity.world.isClient
+                && entity instanceof MooshroomEntity
+                && ((MooshroomEntity)entity).getHealth() > 0
+                && MooshroomEntity.Type.BROWN == MooshroomEntity.Type.valueOf("brown")
+        ) {
+            MooshroomEntity mob = (MooshroomEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(BROWN_MOOSHROOM_BUCKET_ITEM);
             CompoundTag tag = new CompoundTag();
             setCompound(mobBucket, MooshroomBucketItem.STORED_MOB, mob.toTag(tag));
 
@@ -926,7 +1644,7 @@ public class MobBuckets implements ModInitializer {
         return ActionResult.PASS;
     }
 
-    private ActionResult tryCaptureStrider(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
+    private ActionResult tryCaptureColdStrider(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
         if (!entity.world.isClient
                 && entity instanceof StriderEntity
                 && ((StriderEntity)entity).getHealth() > 0
@@ -937,7 +1655,37 @@ public class MobBuckets implements ModInitializer {
             if (held.isEmpty() || held.getItem() != Items.BUCKET)
                 return ActionResult.PASS;
 
-            ItemStack mobBucket = new ItemStack(STRIDER_BUCKET_ITEM);
+            ItemStack mobBucket = new ItemStack(COLD_STRIDER_BUCKET_ITEM);
+            CompoundTag tag = new CompoundTag();
+            setCompound(mobBucket, StriderBucketItem.STORED_MOB, mob.toTag(tag));
+
+            if (held.getCount() == 1) {
+                player.setStackInHand(hand, mobBucket);
+            } else {
+                held.decrement(1);
+                addOrDropStack(player, mobBucket);
+            }
+
+            player.swingHand(hand);
+            entity.remove();
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    private ActionResult tryCaptureWarmStrider(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
+        if (!entity.world.isClient
+                && entity instanceof StriderEntity
+                && ((StriderEntity)entity).getHealth() > 0
+        ) {
+            StriderEntity mob = (StriderEntity)entity;
+            ItemStack held = player.getStackInHand(hand);
+
+            if (held.isEmpty() || held.getItem() != Items.LAVA_BUCKET)
+                return ActionResult.PASS;
+
+            ItemStack mobBucket = new ItemStack(WARM_STRIDER_BUCKET_ITEM);
             CompoundTag tag = new CompoundTag();
             setCompound(mobBucket, StriderBucketItem.STORED_MOB, mob.toTag(tag));
 

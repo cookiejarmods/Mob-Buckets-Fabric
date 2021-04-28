@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.7-SNAPSHOT'
+	id 'fabric-loom' version '0.6-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -22,10 +22,10 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
 	//ARRP
-	modImplementation group: 'net.devtech', name: 'arrp', version: '0.3.9'
+	modImplementation group: 'net.devtech', name: 'arrp', version: '0.3.11'
 
 	//Cookie Core
-	modImplementation group: 'com.github.evoslab', name: 'cookiecore', version: '0.0.4'
+	modImplementation group: 'com.github.evoslab', name: 'cookiecore', version: '0.0.5'
 }
 
 repositories {
