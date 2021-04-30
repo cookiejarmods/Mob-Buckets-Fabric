@@ -2,7 +2,6 @@ package com.github.coderslabs.mobbuckets.item;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -25,16 +24,14 @@ import org.jetbrains.annotations.Nullable;
 import static com.github.coderslabs.mobbuckets.util.MainMobBucketInfo.*;
 
 public class AnimalBucketItem extends BucketItem {
-    private final EntityType<?> animalType;
-    private static String storedMobString;
-    private final Fluid fluid;
-    private final Item item;
+    public final EntityType<?> animalType;
+    public static String storedMobString;
+    public final Fluid fluid;
 
-    public AnimalBucketItem(EntityType<?> type, Fluid fluid, Settings settings, String storedMobString, Item item) {
+    public AnimalBucketItem(EntityType<?> type, Fluid fluid, Settings settings, String storedMobString) {
         super(fluid, settings);
         this.animalType = type;
         this.fluid = fluid;
-        this.item = item;
         AnimalBucketItem.storedMobString = storedMobString;
     }
 
@@ -77,33 +74,6 @@ public class AnimalBucketItem extends BucketItem {
             player.setStackInHand(hand, new ItemStack(Items.BUCKET));
 
         return ActionResult.SUCCESS;
-    }
-
-    @Override
-    public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity livingEntity, Hand hand) {
-        if (!livingEntity.world.isClient && livingEntity.getHealth() > 0) {
-            ItemStack held = player.getStackInHand(hand);
-
-            if (held.isEmpty() || held.getItem() != Items.BUCKET)
-                return ActionResult.PASS;
-
-            ItemStack mobBucket = new ItemStack(item);
-            CompoundTag tag = new CompoundTag();
-            setCompound(mobBucket, storedMobString, livingEntity.toTag(tag));
-
-            if (held.getCount() == 1) {
-                player.setStackInHand(hand, mobBucket);
-            } else {
-                held.decrement(1);
-                addOrDropStack(player, mobBucket);
-            }
-
-            player.swingHand(hand);
-            livingEntity.remove();
-            return ActionResult.SUCCESS;
-        }
-
-        return ActionResult.PASS;
     }
 
     @Override

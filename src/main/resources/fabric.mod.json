@@ -14,7 +14,8 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.coderslabs.mobbuckets.MobBuckets"
+      "com.github.coderslabs.mobbuckets.MobBuckets",
+      "com.github.coderslabs.mobbuckets.extra.Main"
     ],
     "client": [],
     "server": []
