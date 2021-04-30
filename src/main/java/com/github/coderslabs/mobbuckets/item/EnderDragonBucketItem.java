@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-import static com.github.coderslabs.mobbuckets.item.MainMobBucketInfo.*;
+import static com.github.coderslabs.mobbuckets.util.MainMobBucketInfo.*;
 
 public class EnderDragonBucketItem extends Item {
     public static final String STORED_MOB = "stored_mob";

@@ -1,4 +1,4 @@
-package com.github.coderslabs.mobbuckets.item;
+package com.github.coderslabs.mobbuckets.util;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

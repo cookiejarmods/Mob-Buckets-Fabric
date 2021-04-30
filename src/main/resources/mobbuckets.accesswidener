@@ -1,0 +1,4 @@
+accessWidener   v1  named
+
+
+accessible method net/minecraft/entity/Entity readCustomDataFromTag (Lnet/minecraft/nbt/CompoundTag;)V

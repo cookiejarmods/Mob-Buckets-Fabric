@@ -3,7 +3,9 @@
   "package": "com.github.coderslabs.mobbuckets.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "accessor.ItemAccessor"
+    "BucketItemMixin",
+    "MilkBucketItemMixin",
+    "ItemMixin"
   ],
   "client": [],
   "server": [],
