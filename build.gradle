@@ -26,7 +26,8 @@ dependencies {
 
 	modImplementation "curse.maven:handy-510444:${project.handy_version}"
 	include "curse.maven:handy-510444:${project.handy_version}"
-	modRuntime "curse.maven:get-in-the-bucket-mod-fabric-413439:3348504"
+	modImplementation "curse.maven:cloth-api-317121:${project.cloth_api_version}"
+	include "curse.maven:cloth-api-317121:${project.cloth_api_version}"
 }
 
 processResources {
@@ -65,4 +66,8 @@ publishing {
 	}
 
 	repositories {}
+}
+
+sourceSets.main.resources {
+	srcDirs += "$projectDir/src/generated/resources"
 }
