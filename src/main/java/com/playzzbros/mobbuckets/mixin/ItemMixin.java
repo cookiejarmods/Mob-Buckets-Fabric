@@ -1,7 +1,11 @@
-package com.github.coderslabs.mobbuckets.mixin;
+package com.playzzbros.mobbuckets.mixin;
 
-import com.github.coderslabs.mobbuckets.util.IItemMaxCount;
+import com.playzzbros.mobbuckets.util.IItemMaxCount;
+import com.playzzbros.mobbuckets.util.MobBucketHelper;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -9,15 +13,11 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Item.class)
 public abstract class ItemMixin implements IItemMaxCount {
-    //Thanks to AllStackable by Conn_Lost under GNU 3.0
-    @Final
-    @Mutable
-    @Shadow
-    private int maxCount;
-
+    @Mutable @Shadow @Final private int maxCount;
     private int vanillaMaxCount;
 
     @Override

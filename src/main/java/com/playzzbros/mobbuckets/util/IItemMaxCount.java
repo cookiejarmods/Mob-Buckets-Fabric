@@ -1,4 +1,4 @@
-package com.github.coderslabs.mobbuckets.util;
+package com.playzzbros.mobbuckets.util;
 
 public interface IItemMaxCount {
     //Thanks to AllStackable by Conn_Lost under GNU 3.0

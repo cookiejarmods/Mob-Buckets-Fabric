@@ -1,6 +1,6 @@
-package com.github.coderslabs.mobbuckets.mixin;
+package com.playzzbros.mobbuckets.mixin;
 
-import com.github.coderslabs.mobbuckets.util.ItemHelper;
+import com.playzzbros.mobbuckets.util.MobBucketHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -14,14 +14,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MilkBucketItem.class)
 public class MilkBucketItemMixin {
-    //Thanks to AllStackable by Conn_Lost under GNU 3.0
     @Inject(method = "finishUsing", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/item/ItemStack;decrement(I)V"), cancellable = true)
     private void stackableMilkBucket(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir){
-        if (!stack.isEmpty() && ItemHelper.isModified(stack)){
+        if (!stack.isEmpty() && MobBucketHelper.isModified(stack)){
             if (!world.isClient)
                 user.clearStatusEffects();
             if (user instanceof PlayerEntity){
-                ItemHelper.insertNewItem((PlayerEntity)user, new ItemStack(Items.BUCKET));
+                MobBucketHelper.insertNewItem((PlayerEntity)user, new ItemStack(Items.BUCKET));
                 cir.setReturnValue(stack);
             }
         }
