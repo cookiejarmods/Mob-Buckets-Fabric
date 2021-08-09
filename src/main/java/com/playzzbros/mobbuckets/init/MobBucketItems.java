@@ -32,6 +32,8 @@ public class MobBucketItems {
     public static Item EVOKER_BUCKET_ITEM = registerMobBucket("evoker_bucket", EntityType.EVOKER, Fluids.EMPTY);
     public static Item FOX_BUCKET_ITEM = registerMobBucket("fox_bucket", EntityType.FOX, Fluids.EMPTY);
     public static Item GHAST_BUCKET_ITEM = registerMobBucket("ghast_bucket", EntityType.GHAST, Fluids.EMPTY);
+    public static Item GLOW_SQUID_BUCKET_ITEM = registerMobBucket("glow_squid_bucket", EntityType.GLOW_SQUID, Fluids.WATER);
+    public static Item GOAT_BUCKET_ITEM = registerMobBucket("goat_bucket", EntityType.GOAT, Fluids.EMPTY);
     public static Item GUARDIAN_BUCKET_ITEM = registerMobBucket("guardian_bucket", EntityType.GUARDIAN, Fluids.WATER);
     public static Item HOGLIN_BUCKET_ITEM = registerMobBucket("hoglin_bucket", EntityType.HOGLIN, Fluids.EMPTY);
     public static Item HORSE_BUCKET_ITEM = registerMobBucket("horse_bucket", EntityType.HORSE, Fluids.EMPTY);

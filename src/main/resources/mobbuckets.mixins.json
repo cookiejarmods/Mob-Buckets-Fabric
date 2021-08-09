@@ -5,7 +5,8 @@
   "mixins": [
     "BucketItemMixin",
     "ItemMixin",
-    "MilkBucketItemMixin"
+    "MilkBucketItemMixin",
+    "PowderSnowBucketItemMixin"
   ],
   "client": [],
   "server": [],
