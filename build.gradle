@@ -25,7 +25,6 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation "curse.maven:handy-510444:${project.handy_version}"
-	include "curse.maven:handy-510444:${project.handy_version}"
 	modImplementation "curse.maven:cloth-api-317121:${project.cloth_api_version}"
 	include "curse.maven:cloth-api-317121:${project.cloth_api_version}"
 }
