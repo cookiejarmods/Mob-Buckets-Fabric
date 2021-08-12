@@ -4,34 +4,25 @@ import com.google.common.reflect.Reflection;
 import com.playzzbros.mobbuckets.data.MobBucketData;
 import com.playzzbros.mobbuckets.init.MobBucketItems;
 import com.playzzbros.mobbuckets.util.IItemMaxCount;
-import com.playzzbros.mobbuckets.util.MobBucketHelper;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.player.UseEntityCallback;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Pair;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-@SuppressWarnings({"RedundantTypeArguments", "UnstableApiUsage", "rawtypes"})
+@SuppressWarnings({"UnstableApiUsage", "rawtypes"})
 public class MobBuckets implements ModInitializer {
     public static Logger LOGGER = LogManager.getLogger();
 
     public static String MOD_ID = "mobbuckets";
     public static String MOD_NAME = "Mob Buckets";
+
+    public static Map<EntityType<?>, Item> bucketsMap = new HashMap();
 
     @Override
     public void onInitialize() {
@@ -45,110 +36,78 @@ public class MobBuckets implements ModInitializer {
         ((IItemMaxCount)Items.LAVA_BUCKET).setMaxCount(16);
         ((IItemMaxCount)Items.MILK_BUCKET).setMaxCount(16);
 
-        UseEntityCallback.EVENT.register(this::tryCaptures);
         MobBucketData.init();
+
+        put(MobBucketItems.BAT_BUCKET_ITEM, EntityType.BAT);
+        put(MobBucketItems.BEE_BUCKET_ITEM, EntityType.BEE);
+        put(MobBucketItems.BLAZE_BUCKET_BUCKET_ITEM, EntityType.BLAZE);
+        put(MobBucketItems.CAT_BUCKET_ITEM, EntityType.CAT);
+        put(MobBucketItems.CAVE_SPIDER_BUCKET_ITEM, EntityType.CAVE_SPIDER);
+        put(MobBucketItems.CHICKEN_BUCKET_ITEM, EntityType.CHICKEN);
+        put(MobBucketItems.COW_BUCKET_ITEM, EntityType.COW);
+        put(MobBucketItems.CREEPER_BUCKET_ITEM, EntityType.CREEPER);
+        put(MobBucketItems.DOLPHIN_BUCKET_ITEM, EntityType.DOLPHIN);
+        put(MobBucketItems.DONKEY_BUCKET_ITEM, EntityType.DONKEY);
+        put(MobBucketItems.DROWNED_BUCKET_ITEM, EntityType.DROWNED);
+        put(MobBucketItems.ELDER_GUARDIAN_BUCKET_ITEM, EntityType.ELDER_GUARDIAN);
+        put(MobBucketItems.ENDERMAN_BUCKET_ITEM, EntityType.ENDERMAN);
+        put(MobBucketItems.ENDERMITE_BUCKET_ITEM, EntityType.ENDERMITE);
+        put(MobBucketItems.EVOKER_BUCKET_ITEM, EntityType.EVOKER);
+        put(MobBucketItems.FOX_BUCKET_ITEM, EntityType.FOX);
+        put(MobBucketItems.GHAST_BUCKET_ITEM, EntityType.GHAST);
+        put(MobBucketItems.GLOW_SQUID_BUCKET_ITEM, EntityType.GLOW_SQUID);
+        put(MobBucketItems.GOAT_BUCKET_ITEM, EntityType.GOAT);
+        put(MobBucketItems.GUARDIAN_BUCKET_ITEM, EntityType.GUARDIAN);
+        put(MobBucketItems.HOGLIN_BUCKET_ITEM, EntityType.HOGLIN);
+        put(MobBucketItems.HORSE_BUCKET_ITEM, EntityType.HORSE);
+        put(MobBucketItems.HUSK_BUCKET_ITEM, EntityType.HUSK);
+        put(MobBucketItems.IRON_GOLEM_BUCKET_ITEM, EntityType.IRON_GOLEM);
+        put(MobBucketItems.LLAMA_BUCKET_ITEM, EntityType.LLAMA);
+        put(MobBucketItems.MAGMA_CUBE_BUCKET_ITEM, EntityType.MAGMA_CUBE);
+        put(MobBucketItems.MULE_BUCKET_ITEM, EntityType.MULE);
+        put(MobBucketItems.MOOSHROOM_BUCKET_ITEM, EntityType.MOOSHROOM);
+        put(MobBucketItems.OCELOT_BUCKET_ITEM, EntityType.OCELOT);
+        put(MobBucketItems.PANDA_BUCKET_ITEM, EntityType.PANDA);
+        put(MobBucketItems.PARROT_BUCKET_ITEM, EntityType.PARROT);
+        put(MobBucketItems.PHANTOM_BUCKET_ITEM, EntityType.PHANTOM);
+        put(MobBucketItems.PIG_BUCKET_ITEM, EntityType.PIG);
+        put(MobBucketItems.PIGLIN_BUCKET_ITEM, EntityType.PIGLIN);
+        put(MobBucketItems.PIGLIN_BRUTE_BUCKET_ITEM, EntityType.PIGLIN_BRUTE);
+        put(MobBucketItems.PILLAGER_BUCKET_ITEM, EntityType.PILLAGER);
+        put(MobBucketItems.POLAR_BEAR_BUCKET_ITEM, EntityType.POLAR_BEAR);
+        put(MobBucketItems.RABBIT_BUCKET_ITEM, EntityType.RABBIT);
+        put(MobBucketItems.RAVAGER_BUCKET_ITEM, EntityType.RAVAGER);
+        put(MobBucketItems.SHEEP_BUCKET_ITEM, EntityType.SHEEP);
+        put(MobBucketItems.SHULKER_BUCKET_ITEM, EntityType.SHULKER);
+        put(MobBucketItems.SILVERFISH_BUCKET_ITEM, EntityType.SILVERFISH);
+        put(MobBucketItems.SKELETON_BUCKET_ITEM, EntityType.SKELETON);
+        put(MobBucketItems.SKELETON_HORSE_BUCKET_ITEM, EntityType.SKELETON_HORSE);
+        put(MobBucketItems.SLIME_BUCKET_ITEM, EntityType.SLIME);
+        put(MobBucketItems.SNOW_GOLEM_BUCKET_ITEM, EntityType.SNOW_GOLEM);
+        put(MobBucketItems.SPIDER_BUCKET_ITEM, EntityType.SPIDER);
+        put(MobBucketItems.SQUID_BUCKET_ITEM, EntityType.SQUID);
+        put(MobBucketItems.STRAY_BUCKET_ITEM, EntityType.STRAY);
+        put(MobBucketItems.COLD_STRIDER_BUCKET_ITEM, EntityType.STRIDER);
+        put(MobBucketItems.WARM_STRIDER_BUCKET_ITEM, EntityType.STRIDER);
+        put(MobBucketItems.TRADER_LLAMA_BUCKET_ITEM, EntityType.TRADER_LLAMA);
+        put(MobBucketItems.TURTLE_BUCKET_ITEM, EntityType.TURTLE);
+        put(MobBucketItems.VEX_BUCKET_ITEM, EntityType.VEX);
+        put(MobBucketItems.VIlLAGER_BUCKET_ITEM, EntityType.VILLAGER);
+        put(MobBucketItems.VINDICATOR_BUCKET_ITEM, EntityType.VINDICATOR);
+        put(MobBucketItems.WANDERING_TRADER_BUCKET_ITEM, EntityType.WANDERING_TRADER);
+        put(MobBucketItems.WITCH_BUCKET_ITEM, EntityType.WITCH);
+        put(MobBucketItems.WITHER_SKELETON_BUCKET_ITEM, EntityType.WITHER_SKELETON);
+        put(MobBucketItems.WOLF_BUCKET_BUCKET_ITEM, EntityType.WOLF);
+        put(MobBucketItems.ZOGLIN_BUCKET_ITEM, EntityType.ZOGLIN);
+        put(MobBucketItems.ZOMBIE_BUCKET_ITEM, EntityType.ZOMBIE);
+        put(MobBucketItems.ZOMBIE_VILLAGER_BUCKET_ITEM, EntityType.ZOMBIE_VILLAGER);
+        put(MobBucketItems.ZOMBIFIED_PIGLIN_BUCKET_ITEM, EntityType.ZOMBIFIED_PIGLIN);
 
         log(Level.INFO, "Mobing the Buckets");
     }
 
-    public static List<Pair<Item, EntityType>> bucketsList = List.<Pair<Item, EntityType>>of(
-            new Pair<>(MobBucketItems.BAT_BUCKET_ITEM, EntityType.BAT),
-            new Pair<>(MobBucketItems.BEE_BUCKET_ITEM, EntityType.BEE),
-            new Pair<>(MobBucketItems.BLAZE_BUCKET_BUCKET_ITEM, EntityType.BLAZE),
-            new Pair<>(MobBucketItems.CAT_BUCKET_ITEM, EntityType.CAT),
-            new Pair<>(MobBucketItems.CAVE_SPIDER_BUCKET_ITEM, EntityType.CAVE_SPIDER),
-            new Pair<>(MobBucketItems.CHICKEN_BUCKET_ITEM, EntityType.CHICKEN),
-            new Pair<>(MobBucketItems.COW_BUCKET_ITEM, EntityType.COW),
-            new Pair<>(MobBucketItems.CREEPER_BUCKET_ITEM, EntityType.CREEPER),
-            new Pair<>(MobBucketItems.DOLPHIN_BUCKET_ITEM, EntityType.DOLPHIN),
-            new Pair<>(MobBucketItems.DONKEY_BUCKET_ITEM, EntityType.DONKEY),
-            new Pair<>(MobBucketItems.DROWNED_BUCKET_ITEM, EntityType.DROWNED),
-            new Pair<>(MobBucketItems.ELDER_GUARDIAN_BUCKET_ITEM, EntityType.ELDER_GUARDIAN),
-            new Pair<>(MobBucketItems.ENDERMAN_BUCKET_ITEM, EntityType.ENDERMAN),
-            new Pair<>(MobBucketItems.ENDERMITE_BUCKET_ITEM, EntityType.ENDERMITE),
-            new Pair<>(MobBucketItems.EVOKER_BUCKET_ITEM, EntityType.EVOKER),
-            new Pair<>(MobBucketItems.FOX_BUCKET_ITEM, EntityType.FOX),
-            new Pair<>(MobBucketItems.GHAST_BUCKET_ITEM, EntityType.GHAST),
-            new Pair<>(MobBucketItems.GLOW_SQUID_BUCKET_ITEM, EntityType.GLOW_SQUID),
-            new Pair<>(MobBucketItems.GOAT_BUCKET_ITEM, EntityType.GOAT),
-            new Pair<>(MobBucketItems.GUARDIAN_BUCKET_ITEM, EntityType.GUARDIAN),
-            new Pair<>(MobBucketItems.HOGLIN_BUCKET_ITEM, EntityType.HOGLIN),
-            new Pair<>(MobBucketItems.HORSE_BUCKET_ITEM, EntityType.HORSE),
-            new Pair<>(MobBucketItems.HUSK_BUCKET_ITEM, EntityType.HUSK),
-            new Pair<>(MobBucketItems.IRON_GOLEM_BUCKET_ITEM, EntityType.IRON_GOLEM),
-            new Pair<>(MobBucketItems.LLAMA_BUCKET_ITEM, EntityType.LLAMA),
-            new Pair<>(MobBucketItems.MAGMA_CUBE_BUCKET_ITEM, EntityType.MAGMA_CUBE),
-            new Pair<>(MobBucketItems.RED_MOOSHROOM_BUCKET_ITEM, EntityType.MOOSHROOM),
-            new Pair<>(MobBucketItems.BROWN_MOOSHROOM_BUCKET_ITEM, EntityType.MOOSHROOM),
-            new Pair<>(MobBucketItems.MULE_BUCKET_ITEM, EntityType.MULE),
-            new Pair<>(MobBucketItems.OCELOT_BUCKET_ITEM, EntityType.OCELOT),
-            new Pair<>(MobBucketItems.PANDA_BUCKET_ITEM, EntityType.PANDA),
-            new Pair<>(MobBucketItems.PARROT_BUCKET_ITEM, EntityType.PARROT),
-            new Pair<>(MobBucketItems.PHANTOM_BUCKET_ITEM, EntityType.PHANTOM),
-            new Pair<>(MobBucketItems.PIG_BUCKET_ITEM, EntityType.PIG),
-            new Pair<>(MobBucketItems.PIGLIN_BRUTE_BUCKET_ITEM, EntityType.PIGLIN_BRUTE),
-            new Pair<>(MobBucketItems.PIGLIN_BUCKET_ITEM, EntityType.PIGLIN),
-            new Pair<>(MobBucketItems.PILLAGER_BUCKET_ITEM, EntityType.PILLAGER),
-            new Pair<>(MobBucketItems.POLAR_BEAR_BUCKET_ITEM, EntityType.POLAR_BEAR),
-            new Pair<>(MobBucketItems.RABBIT_BUCKET_ITEM, EntityType.RABBIT),
-            new Pair<>(MobBucketItems.RAVAGER_BUCKET_ITEM, EntityType.RAVAGER),
-            new Pair<>(MobBucketItems.SHEEP_BUCKET_ITEM, EntityType.SHEEP),
-            new Pair<>(MobBucketItems.SHULKER_BUCKET_ITEM, EntityType.SHULKER),
-            new Pair<>(MobBucketItems.SKELETON_BUCKET_ITEM, EntityType.SKELETON),
-            new Pair<>(MobBucketItems.SKELETON_HORSE_BUCKET_ITEM, EntityType.SKELETON_HORSE),
-            new Pair<>(MobBucketItems.SLIME_BUCKET_ITEM, EntityType.SLIME),
-            new Pair<>(MobBucketItems.SNOW_GOLEM_BUCKET_ITEM, EntityType.SNOW_GOLEM),
-            new Pair<>(MobBucketItems.SQUID_BUCKET_ITEM, EntityType.SQUID),
-            new Pair<>(MobBucketItems.STRAY_BUCKET_ITEM, EntityType.STRAY),
-            new Pair<>(MobBucketItems.COLD_STRIDER_BUCKET_ITEM, EntityType.STRIDER),
-            new Pair<>(MobBucketItems.WARM_STRIDER_BUCKET_ITEM, EntityType.STRIDER),
-            new Pair<>(MobBucketItems.TURTLE_BUCKET_ITEM, EntityType.TURTLE),
-            new Pair<>(MobBucketItems.VEX_BUCKET_ITEM, EntityType.VEX),
-            new Pair<>(MobBucketItems.VIlLAGER_BUCKET_ITEM, EntityType.VILLAGER),
-            new Pair<>(MobBucketItems.VINDICATOR_BUCKET_ITEM, EntityType.VINDICATOR),
-            new Pair<>(MobBucketItems.WANDERING_TRADER_BUCKET_ITEM, EntityType.WANDERING_TRADER),
-            new Pair<>(MobBucketItems.WITCH_BUCKET_ITEM, EntityType.WITCH),
-            new Pair<>(MobBucketItems.WITHER_SKELETON_BUCKET_ITEM, EntityType.WITHER_SKELETON),
-            new Pair<>(MobBucketItems.WOLF_BUCKET_BUCKET_ITEM, EntityType.WOLF),
-            new Pair<>(MobBucketItems.ZOGLIN_BUCKET_ITEM, EntityType.ZOGLIN),
-            new Pair<>(MobBucketItems.ZOMBIE_BUCKET_ITEM, EntityType.ZOMBIE),
-            new Pair<>(MobBucketItems.ZOMBIE_VILLAGER_BUCKET_ITEM, EntityType.ZOMBIE_VILLAGER),
-            new Pair<>(MobBucketItems.ZOMBIFIED_PIGLIN_BUCKET_ITEM, EntityType.ZOMBIFIED_PIGLIN)
-    );
-
-    public ActionResult tryCaptures(PlayerEntity player, World world, Hand hand, Entity entity, EntityHitResult hitResult) {
-        for (Pair<Item, EntityType> bucketsLists : bucketsList) {
-            return tryCapture(player, hand, entity, bucketsLists.getRight(), new ItemStack(bucketsLists.getLeft()));
-        }
-
-        return ActionResult.PASS;
-    }
-
-    private ActionResult tryCapture(PlayerEntity player, Hand hand, Entity entity, EntityType<?> mobEntity, ItemStack mobBucket) {
-        ItemStack held = player.getStackInHand(hand);
-
-        if (!entity.world.isClient && entity.getType() == mobEntity && ((LivingEntity)entity).getHealth() > 0) {
-            if (held.isEmpty() || held.getItem() != Items.BUCKET) {
-                return ActionResult.PASS;
-            }
-
-            NbtCompound nbt = new NbtCompound();
-            MobBucketHelper.setCompound(mobBucket, "", entity.writeNbt(nbt));
-
-            if (held.getCount() == 1) {
-                player.setStackInHand(hand, mobBucket);
-            } else {
-                held.decrement(1);
-                MobBucketHelper.addOrDropStack(player, mobBucket);
-            }
-
-            player.swingHand(hand);
-            entity.discard();
-
-            return ActionResult.PASS;
-        }
-
-        return ActionResult.PASS;
+    public static void put(Item item, EntityType<?> type){
+        bucketsMap.put(type, item);
     }
 
     public static void log(Level level, String message){

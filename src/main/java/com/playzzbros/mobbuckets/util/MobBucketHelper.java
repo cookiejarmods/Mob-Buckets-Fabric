@@ -1,5 +1,6 @@
 package com.playzzbros.mobbuckets.util;
 
+import com.playzzbros.mobbuckets.mixin.PlayerEntityMixin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
