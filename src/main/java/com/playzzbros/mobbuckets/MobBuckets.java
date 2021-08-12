@@ -32,7 +32,7 @@ public class MobBuckets implements ModInitializer {
         MobBucketItems.init();
 
         ((IItemMaxCount)Items.WATER_BUCKET).setMaxCount(16);
-        ((IItemMaxCount)Items.POWDER_SNOW_BUCKET).setMaxCount(16);
+//        ((IItemMaxCount)Items.POWDER_SNOW_BUCKET).setMaxCount(16);
         ((IItemMaxCount)Items.LAVA_BUCKET).setMaxCount(16);
         ((IItemMaxCount)Items.MILK_BUCKET).setMaxCount(16);
 
