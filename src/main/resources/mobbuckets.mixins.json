@@ -6,8 +6,7 @@
     "BucketItemMixin",
     "ItemMixin",
     "MilkBucketItemMixin",
-    "PlayerEntityMixin",
-    "PowderSnowBucketItemMixin"
+    "PlayerEntityMixin"
   ],
   "client": [],
   "server": [],

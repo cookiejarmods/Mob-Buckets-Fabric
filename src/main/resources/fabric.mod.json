@@ -37,6 +37,9 @@
       "com.playzzbros.mobbuckets.datagen.impl.MobBucketsDataGen"
     ]
   },
+  "mixins": [
+    "mobbuckets.mixins.json"
+  ],
   "accessWidener": "mobbuckets.accesswidener",
 
   "depends": {
