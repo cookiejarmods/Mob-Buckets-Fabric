@@ -8,5 +8,4 @@
 
 ## License
 
-This mod is available under the GPL-3.0 license for the source code.
-This mod is available under the ARR license for the art.
+This mod is available under the GPL-3.0 license.
