@@ -29,7 +29,7 @@ public class MobBucketItems {
     public static Item ENDERMITE_BUCKET_ITEM = registerMobBucket("endermite_bucket", EntityType.ENDERMITE, Fluids.EMPTY);
     public static Item EVOKER_BUCKET_ITEM = registerMobBucket("evoker_bucket", EntityType.EVOKER, Fluids.EMPTY);
     public static Item FOX_BUCKET_ITEM = registerMobBucket("fox_bucket", EntityType.FOX, Fluids.EMPTY);
-//    public static Item SNOPW_FOX_BUCKET_ITEM = registerMobBucket("snow_fox_bucket", EntityType.FOX, Fluids.EMPTY);
+//    public static Item SNOW_FOX_BUCKET_ITEM = registerMobBucket("snow_fox_bucket", EntityType.FOX, Fluids.EMPTY);
     public static Item GHAST_BUCKET_ITEM = registerMobBucket("ghast_bucket", EntityType.GHAST, Fluids.EMPTY);
     //Maybe GIANT?
     public static Item GLOW_SQUID_BUCKET_ITEM = registerMobBucket("glow_squid_bucket", EntityType.GLOW_SQUID, Fluids.WATER);
