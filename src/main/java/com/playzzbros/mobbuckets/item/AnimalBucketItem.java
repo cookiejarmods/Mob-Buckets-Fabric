@@ -1,7 +1,6 @@
 package com.playzzbros.mobbuckets.item;
 
 import com.playzzbros.mobbuckets.util.MobBucketHelper;
-import me.stevenplayzz.handy.core.util.item.appending.SelectedItemGroupAppender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -25,7 +24,7 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 public class AnimalBucketItem extends BucketItem {
-    private static final SelectedItemGroupAppender APPENDER = new SelectedItemGroupAppender(Items.AXOLOTL_BUCKET);
+//    private static final SelectedItemGroupAppender APPENDER = new SelectedItemGroupAppender(Items.AXOLOTL_BUCKET);
 
     public final EntityType<?> animalType;
     public final String storedMobString;
@@ -84,8 +83,8 @@ public class AnimalBucketItem extends BucketItem {
         world.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY_FISH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
     }
 
-    @Override
-    public void appendStacks(ItemGroup group, DefaultedList<ItemStack> items) {
-        APPENDER.appendStacks(this, group, items);
-    }
+//    @Override
+//    public void appendStacks(ItemGroup group, DefaultedList<ItemStack> items) {
+//        APPENDER.appendStacks(this, group, items);
+//    }
 }

@@ -29,6 +29,7 @@ public class MobBucketItems {
     public static Item ENDERMITE_BUCKET_ITEM = registerMobBucket("endermite_bucket", EntityType.ENDERMITE, Fluids.EMPTY);
     public static Item EVOKER_BUCKET_ITEM = registerMobBucket("evoker_bucket", EntityType.EVOKER, Fluids.EMPTY);
     public static Item FOX_BUCKET_ITEM = registerMobBucket("fox_bucket", EntityType.FOX, Fluids.EMPTY);
+//    public static Item SNOPW_FOX_BUCKET_ITEM = registerMobBucket("snow_fox_bucket", EntityType.FOX, Fluids.EMPTY);
     public static Item GHAST_BUCKET_ITEM = registerMobBucket("ghast_bucket", EntityType.GHAST, Fluids.EMPTY);
     //Maybe GIANT?
     public static Item GLOW_SQUID_BUCKET_ITEM = registerMobBucket("glow_squid_bucket", EntityType.GLOW_SQUID, Fluids.WATER);
@@ -42,7 +43,8 @@ public class MobBucketItems {
     public static Item LLAMA_BUCKET_ITEM = registerMobBucket("llama_bucket", EntityType.LLAMA, Fluids.EMPTY);
     public static Item MAGMA_CUBE_BUCKET_ITEM = registerMobBucket("magma_cube_bucket", EntityType.MAGMA_CUBE, Fluids.LAVA);
     public static Item MULE_BUCKET_ITEM = registerMobBucket("mule_bucket", EntityType.MULE, Fluids.EMPTY);
-    public static Item MOOSHROOM_BUCKET_ITEM = registerMobBucket("mooshroom_bucket", EntityType.MOOSHROOM, Fluids.EMPTY);
+    public static Item RED_MOOSHROOM_BUCKET_ITEM = registerMobBucket("red_mooshroom_bucket", EntityType.MOOSHROOM, Fluids.EMPTY);
+//    public static Item BROWN_MOOSHROOM_BUCKET_ITEM = registerMobBucket("brown_mooshroom_bucket", EntityType.MOOSHROOM, Fluids.EMPTY);
     public static Item OCELOT_BUCKET_ITEM = registerMobBucket("ocelot_bucket", EntityType.OCELOT, Fluids.EMPTY);
     public static Item PANDA_BUCKET_ITEM = registerMobBucket("panda_bucket", EntityType.PANDA, Fluids.EMPTY);
     public static Item PARROT_BUCKET_ITEM = registerMobBucket("parrot_bucket", EntityType.PARROT, Fluids.EMPTY);

@@ -1,7 +1,7 @@
 package com.playzzbros.mobbuckets;
 
 import com.google.common.reflect.Reflection;
-import com.playzzbros.mobbuckets.data.MobBucketData;
+import com.playzzbros.mobbuckets.datagen.impl.MobBucketsDataGen;
 import com.playzzbros.mobbuckets.init.MobBucketItems;
 import com.playzzbros.mobbuckets.util.IItemMaxCount;
 import net.fabricmc.api.ModInitializer;
@@ -31,12 +31,10 @@ public class MobBuckets implements ModInitializer {
         );
         MobBucketItems.init();
 
-        ((IItemMaxCount)Items.WATER_BUCKET).setMaxCount(16);
-//        ((IItemMaxCount)Items.POWDER_SNOW_BUCKET).setMaxCount(16);
-        ((IItemMaxCount)Items.LAVA_BUCKET).setMaxCount(16);
-        ((IItemMaxCount)Items.MILK_BUCKET).setMaxCount(16);
-
-        MobBucketData.init();
+//        ((IItemMaxCount)Items.WATER_BUCKET).setMaxCount(16);
+////        ((IItemMaxCount)Items.POWDER_SNOW_BUCKET).setMaxCount(16);
+//        ((IItemMaxCount)Items.LAVA_BUCKET).setMaxCount(16);
+//        ((IItemMaxCount)Items.MILK_BUCKET).setMaxCount(16);
 
         put(MobBucketItems.BAT_BUCKET_ITEM, EntityType.BAT);
         put(MobBucketItems.BEE_BUCKET_ITEM, EntityType.BEE);
@@ -54,6 +52,7 @@ public class MobBuckets implements ModInitializer {
         put(MobBucketItems.ENDERMITE_BUCKET_ITEM, EntityType.ENDERMITE);
         put(MobBucketItems.EVOKER_BUCKET_ITEM, EntityType.EVOKER);
         put(MobBucketItems.FOX_BUCKET_ITEM, EntityType.FOX);
+//        put(MobBucketItems.SNOPW_FOX_BUCKET_ITEM, EntityType.FOX);
         put(MobBucketItems.GHAST_BUCKET_ITEM, EntityType.GHAST);
         put(MobBucketItems.GLOW_SQUID_BUCKET_ITEM, EntityType.GLOW_SQUID);
         put(MobBucketItems.GOAT_BUCKET_ITEM, EntityType.GOAT);
@@ -65,7 +64,8 @@ public class MobBuckets implements ModInitializer {
         put(MobBucketItems.LLAMA_BUCKET_ITEM, EntityType.LLAMA);
         put(MobBucketItems.MAGMA_CUBE_BUCKET_ITEM, EntityType.MAGMA_CUBE);
         put(MobBucketItems.MULE_BUCKET_ITEM, EntityType.MULE);
-        put(MobBucketItems.MOOSHROOM_BUCKET_ITEM, EntityType.MOOSHROOM);
+        put(MobBucketItems.RED_MOOSHROOM_BUCKET_ITEM, EntityType.MOOSHROOM);
+//        put(MobBucketItems.BROWN_MOOSHROOM_BUCKET_ITEM, EntityType.MOOSHROOM);
         put(MobBucketItems.OCELOT_BUCKET_ITEM, EntityType.OCELOT);
         put(MobBucketItems.PANDA_BUCKET_ITEM, EntityType.PANDA);
         put(MobBucketItems.PARROT_BUCKET_ITEM, EntityType.PARROT);

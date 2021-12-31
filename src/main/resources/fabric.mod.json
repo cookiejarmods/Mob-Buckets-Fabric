@@ -1,31 +1,57 @@
 {
   "schemaVersion": 1,
+
   "id": "mobbuckets",
   "version": "${version}",
-  "name": "Mob Buckets",
-  "description": "Simply Makes Mobs Go In A Bucket!",
-  "authors": [
-    "Playzz Bros"
-  ],
-  "contributors": [],
-  "contact": {},
   "license": "GPL-3.0",
+
+  "name": "Mob Buckets",
   "icon": "assets/mobbuckets/icon.png",
+  "description": "Simply Makes Mobs Go In A Bucket!",
+
+  "authors": [
+    "PlayzzBros Studiozz"
+  ],
+  "contributors": [
+    "StevenPlayzz",
+    "JustoPlayzz",
+    "Evo_934",
+    "Naryyyy",
+    "DavidStain",
+    "uraneptus"
+  ],
+
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/mob-buckets-fabric",
+    "sources": "https://github.com/playzzbrosmods/Mob-Buckets-Fabric",
+    "issues": "https://github.com/playzzbrosmods/Mob-Buckets-Fabric/issues"
+  },
+
   "environment": "*",
   "entrypoints": {
     "main": [
       "com.playzzbros.mobbuckets.MobBuckets"
     ],
     "client": [],
-    "server": []
+    "fabric-datagen": [
+      "com.playzzbros.mobbuckets.datagen.impl.MobBucketsDataGen"
+    ]
   },
-  "mixins": [
-    "mobbuckets.mixins.json"
-  ],
+
   "depends": {
-    "fabricloader": ">=0.11.3",
+    "fabricloader": ">=0.12.6",
     "fabric": "*",
-    "java": ">=16",
-    "minecraft": "1.17.x"
+    "minecraft": "1.18.x",
+    "java": ">=17",
+    "libcd": "3.0.3+1.16.3"
+  },
+
+  "custom": {
+    "modmenu": {
+      "badges": [],
+      "links": {
+        "mod.example.contact.discord": "https://discord.gg/MDfJxJZ"
+      }
+    }
   }
 }

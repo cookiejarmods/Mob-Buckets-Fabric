@@ -19,3 +19,8 @@ bin/
 
 #fabric
 run/
+production/
+
+#wth
+logs/
+.cache/

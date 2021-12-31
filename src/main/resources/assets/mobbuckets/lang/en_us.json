@@ -1,4 +1,6 @@
 {
+  "mod.example.contact.discord": "Discord",
+
   "_comment": "Mob Bucket Tab",
   "itemGroup.mobbuckets.mob_buckets_tab": "Mob Buckets",
 
