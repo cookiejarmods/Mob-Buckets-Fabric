@@ -26,9 +26,7 @@ public class MobBuckets implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        Reflection.initialize(
-                MobBucketItems.class
-        );
+        Reflection.initialize(MobBucketItems.class);
         MobBucketItems.init();
 
 //        ((IItemMaxCount)Items.WATER_BUCKET).setMaxCount(16);

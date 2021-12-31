@@ -37,6 +37,7 @@
       "com.playzzbros.mobbuckets.datagen.impl.MobBucketsDataGen"
     ]
   },
+  "accessWidener": "mobbuckets.accesswidener",
 
   "depends": {
     "fabricloader": ">=0.12.6",
