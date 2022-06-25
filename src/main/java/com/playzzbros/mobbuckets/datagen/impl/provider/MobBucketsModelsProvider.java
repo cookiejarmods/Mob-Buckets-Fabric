@@ -4,9 +4,9 @@ import com.playzzbros.mobbuckets.MobBuckets;
 import com.playzzbros.mobbuckets.init.MobBucketItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockStateDefinitionProvider;
+import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.model.BlockStateModelGenerator;
-import net.minecraft.data.client.model.Models;
+import net.minecraft.data.client.Models;
 import net.minecraft.item.Item;
 import org.apache.logging.log4j.Level;
 

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mobbuckets:item/wandering_trader_bucket"
+  }
+}
